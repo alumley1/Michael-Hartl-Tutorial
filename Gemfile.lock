@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: cfeec96c9ca0fa5035b10be3d73e798cc4fc52f7
+  specs:
+    annotate (2.4.1.beta1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -130,14 +136,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  autotest
-  autotest-rails-pure
+  annotate!
+  autotest (= 4.4.6)
+  autotest-rails-pure (= 4.1.2)
   coffee-rails (~> 3.1.0)
-  jquery-rails
+  jquery-rails (= 1.0.14)
   rails (= 3.1.0)
-  rspec
-  rspec-rails
+  rspec (= 2.6.0)
+  rspec-rails (= 2.6.1)
   sass-rails (~> 3.1.0)
   sqlite3
-  uglifier
-  webrat
+  uglifier (= 1.0.3)
+  webrat (= 0.7.3)
