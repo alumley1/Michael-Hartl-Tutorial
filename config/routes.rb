@@ -1,4 +1,8 @@
 MichaelHartl::Application.routes.draw do
+  get "users/new"
+
+  match '/signup', :to => 'users#new'
+
   # this automatically creates named routes in the controller/views
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
