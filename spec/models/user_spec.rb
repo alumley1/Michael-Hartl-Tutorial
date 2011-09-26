@@ -35,7 +35,7 @@ describe User do
     no_email_user = User.new(@attr.merge(:email => ""))
     no_email_user.should_not be_valid
   end
-    
+
   it "should reject names that are too long" do
     long_name = "a" * 51
     long_name_user = User.new(@attr.merge(:name => long_name))
@@ -108,6 +108,21 @@ describe User do
 
     it "should have an encrypted password attribute" do
       @user.should respond_to(:encrypted_password)
+    end
+
+    it "should set the encrypted password" do
+      @user.encrypted_password.should_not be_blank
+    end
+
+    describe "has_password? method" do
+
+      it "should be true if the passwords match" do
+        @user.has_password?(@attr[:password]).should be_true
+      end
+
+      it "should be false if the passwords don't match" do
+        @user.has_password?("invalid").should be_false
+      end
     end
   end
 end
