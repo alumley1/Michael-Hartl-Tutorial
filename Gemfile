@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
 gem 'sqlite3'
+gem 'jquery-rails', '1.0.14'
 gem 'heroku'
 gem 'gravatar_image_tag', '1.0.0'
 
@@ -26,7 +27,10 @@ group :assets do
   gem 'uglifier', '1.0.3'
 end
 
-gem 'jquery-rails', '1.0.14'
+group :production do
+  # specifically for Heroku, must run 'bundle install --without production'
+  gem 'pg'  
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'
