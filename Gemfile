@@ -17,6 +17,7 @@ group :test do
   gem 'webrat', '0.7.3'
   gem 'autotest', '4.4.6'
   gem 'autotest-rails-pure', '4.1.2'
+  gem 'factory_girl_rails'
 end
 
 # Gems used only for assets and not required
