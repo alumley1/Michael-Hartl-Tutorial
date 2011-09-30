@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
-gem 'sqlite3'
 gem 'jquery-rails', '1.0.14'
 gem 'heroku'
 gem 'gravatar_image_tag', '1.0.0'
@@ -10,6 +9,7 @@ group :development do
   gem 'rspec-rails', '2.6.1'
   gem 'annotate', '2.4.0'
   gem 'pry'
+  gem 'sqlite3'
 end
 
 group :test do
@@ -18,6 +18,7 @@ group :test do
   gem 'autotest', '4.4.6'
   gem 'autotest-rails-pure', '4.1.2'
   gem 'factory_girl_rails', '1.2.0'
+  gem 'sqlite3'
 end
 
 # Gems used only for assets and not required
