@@ -15,11 +15,16 @@ end
 group :test do
   gem 'rspec', '2.6.0'
   gem 'webrat', '0.7.3'
-  gem 'autotest', '4.4.6'
-  gem 'autotest-rails-pure', '4.1.2'
   gem 'factory_girl_rails', '1.2.0'
   gem 'sqlite3'
   gem 'spork', '> 0.9.0.rc'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+
+  if RUBY_PLATFORM.downcase.include?("darwin")
+    gem 'rb-fsevent'
+    gem 'growl'
+  end
 end
 
 # Gems used only for assets and not required
