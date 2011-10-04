@@ -19,6 +19,7 @@ group :test do
   gem 'autotest-rails-pure', '4.1.2'
   gem 'factory_girl_rails', '1.2.0'
   gem 'sqlite3'
+  gem 'spork', '> 0.9.0.rc'
 end
 
 # Gems used only for assets and not required
