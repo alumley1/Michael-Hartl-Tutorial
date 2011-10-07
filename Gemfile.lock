@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/mislav/will_paginate.git
+  revision: d56a8436f0445343d5c9498a04dff746f01cf46c
+  specs:
+    will_paginate (3.0.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -165,7 +171,6 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
-    will_paginate (3.0.2)
 
 PLATFORMS
   ruby
@@ -192,4 +197,4 @@ DEPENDENCIES
   sqlite3
   uglifier (= 1.0.3)
   webrat (= 0.7.3)
-  will_paginate
+  will_paginate!

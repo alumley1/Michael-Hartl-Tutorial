@@ -4,7 +4,7 @@ gem 'rails', '3.1.0'
 gem 'jquery-rails', '1.0.14'
 gem 'heroku'
 gem 'gravatar_image_tag', '1.0.0'
-gem 'will_paginate'
+gem 'will_paginate', :git => "https://github.com/mislav/will_paginate.git"
 
 group :development do
   gem 'rspec-rails', '2.6.1'
