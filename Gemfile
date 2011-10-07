@@ -4,6 +4,7 @@ gem 'rails', '3.1.0'
 gem 'jquery-rails', '1.0.14'
 gem 'heroku'
 gem 'gravatar_image_tag', '1.0.0'
+gem 'will_paginate'
 
 group :development do
   gem 'rspec-rails', '2.6.1'
