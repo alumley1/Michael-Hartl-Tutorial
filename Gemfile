@@ -10,6 +10,7 @@ group :development do
   gem 'annotate', '2.4.0'
   gem 'pry'
   gem 'sqlite3'
+  gem 'faker'
 end
 
 group :test do
