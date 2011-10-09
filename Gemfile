@@ -4,21 +4,29 @@ gem 'rails', '3.1.0'
 gem 'jquery-rails', '1.0.14'
 gem 'heroku'
 gem 'gravatar_image_tag', '1.0.0'
+gem 'will_paginate', '~> 3.0.2'
 
 group :development do
   gem 'rspec-rails', '2.6.1'
   gem 'annotate', '2.4.0'
   gem 'pry'
   gem 'sqlite3'
+  gem 'faker'
 end
 
 group :test do
   gem 'rspec', '2.6.0'
   gem 'webrat', '0.7.3'
-  gem 'autotest', '4.4.6'
-  gem 'autotest-rails-pure', '4.1.2'
   gem 'factory_girl_rails', '1.2.0'
   gem 'sqlite3'
+  gem 'spork', '> 0.9.0.rc'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+
+  if RUBY_PLATFORM.downcase.include?("darwin")
+    gem 'rb-fsevent'
+    gem 'growl'
+  end
 end
 
 # Gems used only for assets and not required

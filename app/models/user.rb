@@ -9,6 +9,7 @@
 #  updated_at         :datetime
 #  encrypted_password :string(255)
 #  salt               :string(255)
+#  admin              :boolean         default(FALSE)
 #
 
 require 'digest'
@@ -20,10 +21,10 @@ class User < ActiveRecord::Base
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name, :presence => true,
-                   :length => { :maximum => 50 },
-                   :uniqueness => { :case_sensitive => false }
+                   :length => { :maximum => 50 }
   validates :email, :presence => true,
-                    :format => { :with => email_regex }
+                    :format => { :with => email_regex },
+                    :uniqueness => { :case_sensitive => false }
   validates :password, :presence => true,
                        :confirmation => true,
                        :length => { :within => 6..40 }

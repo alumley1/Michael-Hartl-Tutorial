@@ -1,3 +1,4 @@
+# Added in to make annotations run automatically
 namespace :db do
   task :migrate do
     unless Rails.env.production?
