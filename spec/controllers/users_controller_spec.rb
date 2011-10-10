@@ -351,10 +351,10 @@ describe UsersController do
     describe "as an admin user" do
       
       before(:each) do
-        admin = Factory(:user, :email => "admin@example.com",
+        @admin = Factory(:user, :email => "admin@example.com",
                                :admin => true)
-        test_sign_in(admin)
-        @users = [@user, admin]
+        test_sign_in(@admin)
+        @users = [@user, @admin]
         10.times do 
           @users << Factory(:user, :email => Factory.next(:email))
         end
@@ -378,6 +378,13 @@ describe UsersController do
                                         :'data-method' => 'delete',
                                         :content => 'delete')
         end
+      end
+
+      it "should not allow admins to delete themselves" do
+        get :index
+        lambda do
+          delete :destroy, :id => @admin
+        end.should_not change(User, :count)
       end
     end
   end
