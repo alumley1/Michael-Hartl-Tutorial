@@ -338,6 +338,14 @@ describe UsersController do
         delete :destroy, :id => @user
         response.should redirect_to(root_path)
       end
+
+      it "should not show delete links on users page" do
+        test_sign_in(@user)
+        get :index 
+        response.should_not have_selector("a", :href => '/users/2',
+                                               :'data-method' => 'delete',
+                                               :content => 'delete')
+      end
     end
 
     describe "as an admin user" do
@@ -346,6 +354,10 @@ describe UsersController do
         admin = Factory(:user, :email => "admin@example.com",
                                :admin => true)
         test_sign_in(admin)
+        @users = [@user, admin]
+        10.times do 
+          @users << Factory(:user, :email => Factory.next(:email))
+        end
       end
 
       it "should destroy the user" do
@@ -357,6 +369,15 @@ describe UsersController do
       it "should redirect to the users page" do
         delete :destroy, :id => @user
         response.should redirect_to(users_path)
+      end
+
+      it "should show delete link on users page" do
+        get :index 
+        @users.each do |user|
+          response.should have_selector("a", :href => "/users/#{user.id.to_s}",
+                                        :'data-method' => 'delete',
+                                        :content => 'delete')
+        end
       end
     end
   end

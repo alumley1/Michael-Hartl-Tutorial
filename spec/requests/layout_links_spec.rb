@@ -52,41 +52,31 @@ describe "LayoutLinks" do
   end
 
   describe "when not signed in" do
-    
+
     it "should have a signin link" do
-      visit root_path
+      visit users_path
       response.should have_selector("a", :href => signin_path,
-                                         :content => "Sign in")
+                                    :content => "Sign in")
     end
   end
 
   describe "when signed in" do
 
-    describe "as a normal user" do
+    before(:each) do
+      @user = Factory(:user)
+      integration_sign_in(@user)    # function located in spec_helper
+    end
 
-      before(:each) do
-        @user = Factory(:user)
-        integration_sign_in(@user)    # function located in spec_helper
-      end
+    it "should have a signout link" do
+      visit root_path
+      response.should have_selector("a", :href => signout_path,
+                                    :content => "Sign out")
+    end
 
-      it "should have a signout link" do
-        visit root_path
-        response.should have_selector("a", :href => signout_path,
-                                      :content => "Sign out")
-      end
-
-      it "should have a profile link" do
-        visit root_path
-        response.should have_selector("a", :href => user_path(@user),
-                                      :content => "Profile")
-      end
-
-      it "should not have delete links on the users index" do
-        visit users_path
-        response.should_not have_selector("a", :href => 'users/2',
-                                               :'date-method'  => 'delete',
-                                               :content => 'delete')
-      end
+    it "should have a profile link" do
+      visit root_path
+      response.should have_selector("a", :href => user_path(@user),
+                                    :content => "Profile")
     end
   end
 end
