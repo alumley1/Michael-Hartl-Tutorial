@@ -23,9 +23,9 @@ group :test do
   gem 'guard-spork'
   gem 'guard-rspec'
 
-  if RUBY_PLATFORM.downcase.include?("darwin")
-    gem 'rb-fsevent'
-    gem 'growl'
+  group :darwin do
+    gem 'rb-fsevent', :require => false
+    gem 'growl', :require => false
   end
 end
 
