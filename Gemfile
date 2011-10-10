@@ -11,7 +11,6 @@ group :development do
   gem 'annotate', '2.4.0'
   gem 'pry'
   gem 'sqlite3'
-  gem 'faker'
 end
 
 group :test do
@@ -22,6 +21,7 @@ group :test do
   gem 'spork', '> 0.9.0.rc'
   gem 'guard-spork'
   gem 'guard-rspec'
+  gem 'faker'
 
   group :darwin do
     gem 'rb-fsevent', :require => false
