@@ -125,6 +125,15 @@ describe UsersController do
       get :new
       response.should have_selector("input[name='user[password_confirmation]'][type='password']")
     end
+
+    describe "signed-in users" do
+      it "should redirect to the root url" do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        get :new
+        response.should redirect_to(root_path)
+      end
+    end
   end # GET new
 
   describe "POST 'create'" do
@@ -181,6 +190,15 @@ describe UsersController do
       it "should sign the user in" do
         post :create, :user => @attr
         controller.should be_signed_in
+      end
+    end
+
+    describe "signed-in users" do
+      it "should be redirect to the root url" do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        get :create
+        response.should redirect_to(root_path)
       end
     end
   end # POST create
@@ -320,14 +338,26 @@ describe UsersController do
         delete :destroy, :id => @user
         response.should redirect_to(root_path)
       end
+
+      it "should not show delete links on users page" do
+        test_sign_in(@user)
+        get :index 
+        response.should_not have_selector("a", :href => '/users/2',
+                                               :'data-method' => 'delete',
+                                               :content => 'delete')
+      end
     end
 
     describe "as an admin user" do
       
       before(:each) do
-        admin = Factory(:user, :email => "admin@example.com",
+        @admin = Factory(:user, :email => "admin@example.com",
                                :admin => true)
-        test_sign_in(admin)
+        test_sign_in(@admin)
+        @users = [@user, @admin]
+        10.times do 
+          @users << Factory(:user, :email => Factory.next(:email))
+        end
       end
 
       it "should destroy the user" do
@@ -339,6 +369,24 @@ describe UsersController do
       it "should redirect to the users page" do
         delete :destroy, :id => @user
         response.should redirect_to(users_path)
+      end
+
+      it "should show delete link on all profiles but yours" do
+        get :index 
+        @users.each do |user|
+          if user != @admin
+            response.should have_selector("a", :href => "/users/#{user.id.to_s}",
+                                          :'data-method' => 'delete',
+                                          :content => 'delete')
+          end
+        end
+      end
+
+      it "should not allow admins to delete themselves" do
+        get :index
+        lambda do
+          delete :destroy, :id => @admin
+        end.should_not change(User, :count)
       end
     end
   end
