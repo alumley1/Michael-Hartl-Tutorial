@@ -21,7 +21,7 @@ group :test do
   gem 'spork', '> 0.9.0.rc'
   gem 'guard-spork'
   gem 'guard-rspec'
-  gem 'faker'
+  gem 'faker', :require => false
 
   group :darwin do
     gem 'rb-fsevent', :require => false
