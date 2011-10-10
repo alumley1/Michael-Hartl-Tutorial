@@ -371,12 +371,14 @@ describe UsersController do
         response.should redirect_to(users_path)
       end
 
-      it "should show delete link on users page" do
+      it "should show delete link on all profiles but yours" do
         get :index 
         @users.each do |user|
-          response.should have_selector("a", :href => "/users/#{user.id.to_s}",
-                                        :'data-method' => 'delete',
-                                        :content => 'delete')
+          if user != @admin
+            response.should have_selector("a", :href => "/users/#{user.id.to_s}",
+                                          :'data-method' => 'delete',
+                                          :content => 'delete')
+          end
         end
       end
 
