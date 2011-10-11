@@ -182,5 +182,12 @@ describe User do
     it "should have the right microposts in the right order" do
       @user.microposts.should == [@mp2, @mp1]
     end
+
+    it "should destroy associated microposts" do
+      @user.destroy
+      [@mp1, @mp2].each do |micropost|
+        Micropost.find_by_id(micropost.id).should be_nil
+      end
+    end
   end
 end
