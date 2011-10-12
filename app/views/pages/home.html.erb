@@ -1,8 +1,20 @@
-<h1>Sample App</h1>
+<% if signed_in? %>
+  <table class="front" summary="For signed-in users">
+    <tr>
+      <td class="main">
+        <h1 class="micropost">What's up?</h1>
+        <%= render 'shared/micropost_form' %>
+      </td>
+      <td class="sidebar round">
+        <%= render 'shared/user_info' %>
+      </td>
+    </tr>
+  </table>
+<% else %>
+  <h1>Sample App</h1>
 
-<p>
-This is the home page for the <%=link_to "Ruby on Rails Tutorial", "http://railstutorial.org/" %> sample application.
-</p>
-<% if !signed_in? %>
+  <p>
+  This is the home page for the <%=link_to "Ruby on Rails Tutorial", "http://railstutorial.org/" %> sample application.
+  </p>
   <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
 <% end %>
