@@ -39,13 +39,19 @@ class User < ActiveRecord::Base
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
-    # use ternary operator - if first statement is true return first argument, else return the second one (before and after the colon)
+    # use ternary operator - if first statement is true return first argument,
+    # else return the second one (before and after the colon)
     user && user.has_password?(submitted_password) ? user : nil
   end
 
-  def self.authenticate_with_salt(id, cookie_salt)
-    user = find_by_id(id)
-    (user && user.salt == cookie_salt) ? user : nil
+#   def self.authenticate_with_salt(id, cookie_salt)
+#     user = find_by_id(id)
+#     (user && user.salt == cookie_salt) ? user : nil
+#   end
+
+  def feed
+    # This is preliminary.  See Chapt 12 for the full implementation.
+    Micropost.where("user_id = ?", id)
   end
 
   private
