@@ -17,7 +17,27 @@ describe PagesController do
       get 'home'
       response.should have_selector("title", 
                                     :content => "#{@base_title} | Home")
-      # pulls content from <title> tags
+    end
+
+    describe "when signed in" do
+
+      before(:each) do
+        @user = Factory(:user) 
+        test_sign_in(@user)
+      end
+
+      it "should have 'microposts' in sidebar" do
+        get :home
+        response.should have_selector("span",
+                                      :class => "microposts",
+                                      :content => "micropost")
+      end
+
+      it "should have the right number of microposts" do
+      end
+
+      it "should pluralize if there are more than 1 microposts" do
+      end
     end
   end
 
