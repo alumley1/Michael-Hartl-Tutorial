@@ -24,6 +24,7 @@ describe PagesController do
       before(:each) do
         @user = Factory(:user) 
         test_sign_in(@user)
+        @mp1 = Factory(:micropost, :user => @user)
       end
 
       it "should have 'microposts' in sidebar" do
@@ -34,9 +35,18 @@ describe PagesController do
       end
 
       it "should have the right number of microposts" do
+        get :home
+        response.should have_selector("span",
+                                      :class => "microposts",
+                                      :content => "1 micropost")
       end
 
       it "should pluralize if there are more than 1 microposts" do
+        @mp2 = Factory(:micropost, :user => @user)
+        get :home
+        response.should have_selector("span",
+                                      :class => "microposts",
+                                      :content => "2 microposts")
       end
     end
   end
