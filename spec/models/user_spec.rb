@@ -262,7 +262,7 @@ describe User do
 
     it "should include the follower in the following array" do
       @user.follow!(@followed)
-      @user.followers.should include(@user)
+      @followed.followers.should include(@user)
     end
   end
 end
